@@ -1,0 +1,2 @@
+source /Users/bilus/CLionProjects/ESP32Files/monitor/build/bootloader/gdbinit/symbols
+source /Users/bilus/CLionProjects/ESP32Files/monitor/build/bootloader/gdbinit/connect
