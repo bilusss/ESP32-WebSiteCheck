@@ -1,0 +1,84 @@
+Command: /Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python /Users/bilus/esp/esp-idf/tools/idf_monitor.py -p /dev/tty.usbserial-130 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 /Users/bilus/CLionProjects/ESP32Files/monitor/build/monitor.elf /Users/bilus/CLionProjects/ESP32Files/monitor/build/bootloader/bootloader.elf -m '/Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python' '/Users/bilus/esp/esp-idf/tools/idf.py' '-p' '/dev/tty.usbserial-130'
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6368
+load:0x40078000,len:15880
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (27) boot: ESP-IDF v5.5-dev-2488-gee77c489e7 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time Mar 20 2025 00:28:33[0m
+[0;32mI (28) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v3.1[0m
+[0;32mI (33) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (37) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (57) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot:  3 spiffs           Unknown data     01 82 00110000 00080000[0m
+[0;32mI (84) boot: End of partition table[0m
+[0;32mI (87) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1de20h (122400) map[0m
+[0;32mI (136) esp_image: segment 1: paddr=0002de48 vaddr=3ff80000 size=0001ch (    28) load[0m
+[0;32mI (136) esp_image: segment 2: paddr=0002de6c vaddr=3ffb0000 size=021ach (  8620) load[0m
+[0;32mI (143) esp_image: segment 3: paddr=00030020 vaddr=400d0020 size=a2240h (664128) map[0m
+[0;32mI (374) esp_image: segment 4: paddr=000d2268 vaddr=3ffb21ac size=01da4h (  7588) load[0m
+[0;32mI (378) esp_image: segment 5: paddr=000d4014 vaddr=40080000 size=1772ch ( 96044) load[0m
+[0;32mI (427) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (427) boot: Disabling RNG early entropy source...[0m
+[0;32mI (438) cpu_start: Multicore app[0m
+[0;32mI (446) cpu_start: Pro cpu start user code[0m
+[0;32mI (446) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (446) app_init: Application information:[0m
+[0;32mI (446) app_init: Project name:     monitor[0m
+[0;32mI (450) app_init: App version:      5b52729-dirty[0m
+[0;32mI (455) app_init: Compile time:     Mar 20 2025 00:59:37[0m
+[0;32mI (460) app_init: ELF file SHA256:  614d63b1e...[0m
+[0;32mI (464) app_init: ESP-IDF:          v5.5-dev-2488-gee77c489e7[0m
+[0;32mI (469) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (473) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (477) efuse_init: Chip rev:         v3.1[0m
+[0;32mI (481) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (488) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (493) heap_init: At 3FFB88E0 len 00027720 (157 KiB): DRAM[0m
+[0;32mI (498) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (503) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (509) heap_init: At 4009772C len 000088D4 (34 KiB): IRAM[0m
+[0;32mI (516) spi_flash: detected chip: generic[0m
+[0;32mI (518) spi_flash: flash io: dio[0m
+[0;33mW (521) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (534) main_task: Started on CPU0[0m
+[0;32mI (544) main_task: Calling app_main()[0m
+[0;32mI (624) wifi:wifi driver task: 3ffc133c, prio:23, stack:6656, core=0[0m
+[0;32mI (634) wifi:wifi firmware version: 7086521f2a[0m
+[0;32mI (634) wifi:wifi certification version: v7.0[0m
+[0;32mI (634) wifi:config NVS flash: enabled[0m
+[0;32mI (634) wifi:config nano formatting: disabled[0m
+[0;32mI (644) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (644) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (654) wifi:Init management short buffer num: 32[0m
+[0;32mI (654) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (664) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (664) wifi:Init static rx buffer num: 10[0m
+[0;32mI (664) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (674) wifi_init: rx ba win: 6[0m
+[0;32mI (674) wifi_init: accept mbox: 6[0m
+[0;32mI (674) wifi_init: tcpip mbox: 32[0m
+[0;32mI (684) wifi_init: udp mbox: 6[0m
+[0;32mI (684) wifi_init: tcp mbox: 6[0m
+[0;32mI (684) wifi_init: tcp tx win: 5760[0m
+[0;32mI (694) wifi_init: tcp rx win: 5760[0m
+[0;32mI (694) wifi_init: tcp mss: 1440[0m
+[0;32mI (694) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (704) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;33mW (704) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;32mI (724) phy_init: phy_version 4860,6b7a6e5,Feb  6 2025,14:47:07[0m
+[0;32mI (804) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)[0m
+[0;32mI (834) wifi:mode : sta (94:54:c5:74:db:dc)[0m
+[0;32mI (834) wifi:enable tsf[0m

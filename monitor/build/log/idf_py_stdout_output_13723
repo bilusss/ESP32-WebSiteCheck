@@ -1,0 +1,507 @@
+Command: /Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python /Users/bilus/esp/esp-idf/tools/idf_monitor.py -p /dev/tty.usbserial-130 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 /Users/bilus/CLionProjects/ESP32Files/monitor/build/monitor.elf /Users/bilus/CLionProjects/ESP32Files/monitor/build/bootloader/bootloader.elf -m '/Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python' '/Users/bilus/esp/esp-idf/tools/idf.py' '-p' '/dev/tty.usbserial-130'
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6368
+load:0x40078000,len:15880
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (27) boot: ESP-IDF v5.5-dev-2488-gee77c489e7 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time Mar 20 2025 00:28:33[0m
+[0;32mI (28) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v3.1[0m
+[0;32mI (33) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (37) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (57) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot:  3 spiffs           Unknown data     01 82 00110000 00080000[0m
+[0;32mI (84) boot: End of partition table[0m
+[0;32mI (87) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1e4c8h (124104) map[0m
+[0;32mI (137) esp_image: segment 1: paddr=0002e4f0 vaddr=3ff80000 size=0001ch (    28) load[0m
+[0;32mI (137) esp_image: segment 2: paddr=0002e514 vaddr=3ffb0000 size=01b04h (  6916) load[0m
+[0;32mI (143) esp_image: segment 3: paddr=00030020 vaddr=400d0020 size=a57c8h (677832) map[0m
+[0;32mI (380) esp_image: segment 4: paddr=000d57f0 vaddr=3ffb1b04 size=024dch (  9436) load[0m
+[0;32mI (383) esp_image: segment 5: paddr=000d7cd4 vaddr=40080000 size=17754h ( 96084) load[0m
+[0;32mI (432) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (433) boot: Disabling RNG early entropy source...[0m
+[0;32mI (443) cpu_start: Multicore app[0m
+[0;32mI (452) cpu_start: Pro cpu start user code[0m
+[0;32mI (452) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (452) app_init: Application information:[0m
+[0;32mI (452) app_init: Project name:     monitor[0m
+[0;32mI (456) app_init: App version:      5b52729-dirty[0m
+[0;32mI (460) app_init: Compile time:     Mar 20 2025 00:59:37[0m
+[0;32mI (465) app_init: ELF file SHA256:  8f027fd42...[0m
+[0;32mI (469) app_init: ESP-IDF:          v5.5-dev-2488-gee77c489e7[0m
+[0;32mI (475) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (479) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (483) efuse_init: Chip rev:         v3.1[0m
+[0;32mI (487) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (493) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (498) heap_init: At 3FFB8990 len 00027670 (157 KiB): DRAM[0m
+[0;32mI (503) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (508) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (514) heap_init: At 40097754 len 000088AC (34 KiB): IRAM[0m
+[0;32mI (521) spi_flash: detected chip: generic[0m
+[0;32mI (523) spi_flash: flash io: dio[0m
+[0;33mW (526) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (539) main_task: Started on CPU0[0m
+[0;32mI (549) main_task: Calling app_main()[0m
+[0;32mI (609) MONITOR: Konfiguracja załadowana: SSID=router[0m
+[0;32mI (629) wifi:wifi driver task: 3ffc13ec, prio:23, stack:6656, core=0[0m
+[0;32mI (639) wifi:wifi firmware version: 7086521f2a[0m
+[0;32mI (639) wifi:wifi certification version: v7.0[0m
+[0;32mI (639) wifi:config NVS flash: enabled[0m
+[0;32mI (649) wifi:config nano formatting: disabled[0m
+[0;32mI (649) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (649) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (659) wifi:Init management short buffer num: 32[0m
+[0;32mI (659) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (669) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (669) wifi:Init static rx buffer num: 10[0m
+[0;32mI (669) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (679) wifi_init: rx ba win: 6[0m
+[0;32mI (679) wifi_init: accept mbox: 6[0m
+[0;32mI (679) wifi_init: tcpip mbox: 32[0m
+[0;32mI (689) wifi_init: udp mbox: 6[0m
+[0;32mI (689) wifi_init: tcp mbox: 6[0m
+[0;32mI (689) wifi_init: tcp tx win: 5760[0m
+[0;32mI (699) wifi_init: tcp rx win: 5760[0m
+[0;32mI (699) wifi_init: tcp mss: 1440[0m
+[0;32mI (699) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (709) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;33mW (709) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;32mI (729) phy_init: phy_version 4860,6b7a6e5,Feb  6 2025,14:47:07[0m
+[0;32mI (819) wifi:mode : sta (94:54:c5:74:db:dc)[0m
+[0;32mI (819) wifi:enable tsf[0m
+[0;32mI (819) MONITOR: Czekam na połączenie z Wi-Fi...[0m
+[0;32mI (819) MONITOR: Wi-Fi STA started, connecting...[0m
+[0;32mI (829) wifi:new:<5,0>, old:<1,0>, ap:<255,255>, sta:<5,0>, prof:6, snd_ch_cfg:0x0[0m
+[0;32mI (839) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (839) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (859) wifi:state: assoc -> init (0x2c0)[0m
+[0;32mI (869) wifi:new:<5,0>, old:<5,0>, ap:<255,255>, sta:<5,0>, prof:6, snd_ch_cfg:0x0[0m
+[1;31mE (869) MONITOR: Wi-Fi disconnected, reason: 203[0m
+[1;31mE (3279) MONITOR: Wi-Fi disconnected, reason: 205[0m
+[0;32mI (3299) wifi:new:<5,0>, old:<5,0>, ap:<255,255>, sta:<5,0>, prof:6, snd_ch_cfg:0x0[0m
+[0;32mI (3299) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (3309) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (3319) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (3339) wifi:connected with router, aid = 3, channel 5, BW20, bssid = 5c:62:8b:4f:51:e2[0m
+[0;32mI (3339) wifi:security: WPA2-PSK, phy: bgn, rssi: -37[0m
+[0;32mI (3349) wifi:pm start, type: 1[0m
+
+[0;32mI (3349) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (3349) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (4379) esp_netif_handlers: sta ip: 192.168.0.230, mask: 255.255.255.0, gw: 192.168.0.1[0m
+[0;32mI (4379) MONITOR: Połączono z Wi-Fi i uzyskano IP: 192.168.0.230[0m
+[0;32mI (4819) MONITOR: Wi-Fi podłączone, zaczynam wysyłanie żądań[0m
+[0;32mI (4819) wifi:<ba-add>idx:0 (ifx:0, 5c:62:8b:4f:51:e2), tid:0, ssn:0, winSize:64[0m
+[0;32mI (5249) wifi:<ba-add>idx:1 (ifx:0, 5c:62:8b:4f:51:e2), tid:5, ssn:0, winSize:64[0m
+[1;31mE (5259) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (5259) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (5269) esp-tls: create_ssl_handle failed[0m
+[1;31mE (5269) esp-tls: Failed to open new connection[0m
+[1;31mE (5279) transport_base: Failed to open a new connection[0m
+[1;31mE (5279) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (5289) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (5609) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (5609) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (5619) esp-tls: create_ssl_handle failed[0m
+[1;31mE (5619) esp-tls: Failed to open new connection[0m
+[1;31mE (5629) transport_base: Failed to open a new connection[0m
+[1;31mE (5639) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (5639) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (5669) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (5669) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (5679) esp-tls: create_ssl_handle failed[0m
+[1;31mE (5679) esp-tls: Failed to open new connection[0m
+[1;31mE (5679) transport_base: Failed to open a new connection[0m
+[1;31mE (5689) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (5689) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (15719) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (15719) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (15729) esp-tls: create_ssl_handle failed[0m
+[1;31mE (15739) esp-tls: Failed to open new connection[0m
+[1;31mE (15739) transport_base: Failed to open a new connection[0m
+[1;31mE (15749) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (15749) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (15779) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (15779) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (15789) esp-tls: create_ssl_handle failed[0m
+[1;31mE (15799) esp-tls: Failed to open new connection[0m
+[1;31mE (15799) transport_base: Failed to open a new connection[0m
+[1;31mE (15809) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (15809) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (25839) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (25839) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (25849) esp-tls: create_ssl_handle failed[0m
+[1;31mE (25859) esp-tls: Failed to open new connection[0m
+[1;31mE (25859) transport_base: Failed to open a new connection[0m
+[1;31mE (25869) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (25869) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (25899) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (25909) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (25909) esp-tls: create_ssl_handle failed[0m
+[1;31mE (25919) esp-tls: Failed to open new connection[0m
+[1;31mE (25919) transport_base: Failed to open a new connection[0m
+[1;31mE (25929) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (25929) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (35959) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (35959) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (35969) esp-tls: create_ssl_handle failed[0m
+[1;31mE (35979) esp-tls: Failed to open new connection[0m
+[1;31mE (35979) transport_base: Failed to open a new connection[0m
+[1;31mE (35989) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (35989) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (36019) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (36019) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (36029) esp-tls: create_ssl_handle failed[0m
+[1;31mE (36039) esp-tls: Failed to open new connection[0m
+[1;31mE (36039) transport_base: Failed to open a new connection[0m
+[1;31mE (36049) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (36049) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (46079) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (46079) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (46089) esp-tls: create_ssl_handle failed[0m
+[1;31mE (46099) esp-tls: Failed to open new connection[0m
+[1;31mE (46099) transport_base: Failed to open a new connection[0m
+[1;31mE (46109) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (46109) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (46139) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (46139) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (46149) esp-tls: create_ssl_handle failed[0m
+[1;31mE (46159) esp-tls: Failed to open new connection[0m
+[1;31mE (46159) transport_base: Failed to open a new connection[0m
+[1;31mE (46169) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (46169) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (56199) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (56209) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (56209) esp-tls: create_ssl_handle failed[0m
+[1;31mE (56219) esp-tls: Failed to open new connection[0m
+[1;31mE (56219) transport_base: Failed to open a new connection[0m
+[1;31mE (56229) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (56229) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (56269) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (56269) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (56279) esp-tls: create_ssl_handle failed[0m
+[1;31mE (56279) esp-tls: Failed to open new connection[0m
+[1;31mE (56289) transport_base: Failed to open a new connection[0m
+[1;31mE (56289) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (56299) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (66319) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (66319) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (66329) esp-tls: create_ssl_handle failed[0m
+[1;31mE (66339) esp-tls: Failed to open new connection[0m
+[1;31mE (66339) transport_base: Failed to open a new connection[0m
+[1;31mE (66349) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (66349) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (66389) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (66389) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (66399) esp-tls: create_ssl_handle failed[0m
+[1;31mE (66399) esp-tls: Failed to open new connection[0m
+[1;31mE (66409) transport_base: Failed to open a new connection[0m
+[1;31mE (66409) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (66419) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (76439) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (76439) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (76449) esp-tls: create_ssl_handle failed[0m
+[1;31mE (76459) esp-tls: Failed to open new connection[0m
+[1;31mE (76459) transport_base: Failed to open a new connection[0m
+[1;31mE (76469) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (76469) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (76499) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (76499) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (76509) esp-tls: create_ssl_handle failed[0m
+[1;31mE (76519) esp-tls: Failed to open new connection[0m
+[1;31mE (76519) transport_base: Failed to open a new connection[0m
+[1;31mE (76529) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (76529) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (86559) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (86559) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (86569) esp-tls: create_ssl_handle failed[0m
+[1;31mE (86579) esp-tls: Failed to open new connection[0m
+[1;31mE (86579) transport_base: Failed to open a new connection[0m
+[1;31mE (86589) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (86589) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (86629) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (86629) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (86639) esp-tls: create_ssl_handle failed[0m
+[1;31mE (86639) esp-tls: Failed to open new connection[0m
+[1;31mE (86639) transport_base: Failed to open a new connection[0m
+[1;31mE (86649) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (86649) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (96679) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (96679) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (96689) esp-tls: create_ssl_handle failed[0m
+[1;31mE (96699) esp-tls: Failed to open new connection[0m
+[1;31mE (96699) transport_base: Failed to open a new connection[0m
+[1;31mE (96709) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (96709) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (96749) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (96749) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (96759) esp-tls: create_ssl_handle failed[0m
+[1;31mE (96759) esp-tls: Failed to open new connection[0m
+[1;31mE (96759) transport_base: Failed to open a new connection[0m
+[1;31mE (96769) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (96769) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (106809) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (106809) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (106819) esp-tls: create_ssl_handle failed[0m
+[1;31mE (106819) esp-tls: Failed to open new connection[0m
+[1;31mE (106829) transport_base: Failed to open a new connection[0m
+[1;31mE (106839) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (106839) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (106879) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (106879) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (106889) esp-tls: create_ssl_handle failed[0m
+[1;31mE (106899) esp-tls: Failed to open new connection[0m
+[1;31mE (106899) transport_base: Failed to open a new connection[0m
+[1;31mE (106909) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (106909) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (116939) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (116939) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (116949) esp-tls: create_ssl_handle failed[0m
+[1;31mE (116959) esp-tls: Failed to open new connection[0m
+[1;31mE (116959) transport_base: Failed to open a new connection[0m
+[1;31mE (116969) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (116969) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (117009) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (117009) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (117019) esp-tls: create_ssl_handle failed[0m
+[1;31mE (117019) esp-tls: Failed to open new connection[0m
+[1;31mE (117019) transport_base: Failed to open a new connection[0m
+[1;31mE (117029) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (117029) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (127059) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (127059) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (127069) esp-tls: create_ssl_handle failed[0m
+[1;31mE (127079) esp-tls: Failed to open new connection[0m
+[1;31mE (127079) transport_base: Failed to open a new connection[0m
+[1;31mE (127089) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (127089) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (127129) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (127129) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (127139) esp-tls: create_ssl_handle failed[0m
+[1;31mE (127139) esp-tls: Failed to open new connection[0m
+[1;31mE (127139) transport_base: Failed to open a new connection[0m
+[1;31mE (127149) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (127149) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (137179) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (137179) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (137189) esp-tls: create_ssl_handle failed[0m
+[1;31mE (137199) esp-tls: Failed to open new connection[0m
+[1;31mE (137199) transport_base: Failed to open a new connection[0m
+[1;31mE (137209) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (137209) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (137249) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (137249) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (137259) esp-tls: create_ssl_handle failed[0m
+[1;31mE (137259) esp-tls: Failed to open new connection[0m
+[1;31mE (137259) transport_base: Failed to open a new connection[0m
+[1;31mE (137269) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (137269) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (147309) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (147309) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (147319) esp-tls: create_ssl_handle failed[0m
+[1;31mE (147319) esp-tls: Failed to open new connection[0m
+[1;31mE (147329) transport_base: Failed to open a new connection[0m
+[1;31mE (147329) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (147329) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (147369) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (147369) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (147379) esp-tls: create_ssl_handle failed[0m
+[1;31mE (147379) esp-tls: Failed to open new connection[0m
+[1;31mE (147389) transport_base: Failed to open a new connection[0m
+[1;31mE (147389) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (147399) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (157419) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (157419) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (157429) esp-tls: create_ssl_handle failed[0m
+[1;31mE (157439) esp-tls: Failed to open new connection[0m
+[1;31mE (157439) transport_base: Failed to open a new connection[0m
+[1;31mE (157449) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (157449) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (157489) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (157489) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (157499) esp-tls: create_ssl_handle failed[0m
+[1;31mE (157499) esp-tls: Failed to open new connection[0m
+[1;31mE (157509) transport_base: Failed to open a new connection[0m
+[1;31mE (157509) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (157519) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (167539) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (167539) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (167549) esp-tls: create_ssl_handle failed[0m
+[1;31mE (167559) esp-tls: Failed to open new connection[0m
+[1;31mE (167559) transport_base: Failed to open a new connection[0m
+[1;31mE (167569) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (167569) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (167599) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (167609) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (167619) esp-tls: create_ssl_handle failed[0m
+[1;31mE (167619) esp-tls: Failed to open new connection[0m
+[1;31mE (167619) transport_base: Failed to open a new connection[0m
+[1;31mE (167629) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (167629) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (177659) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (177659) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (177669) esp-tls: create_ssl_handle failed[0m
+[1;31mE (177679) esp-tls: Failed to open new connection[0m
+[1;31mE (177679) transport_base: Failed to open a new connection[0m
+[1;31mE (177689) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (177689) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (177729) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (177729) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (177739) esp-tls: create_ssl_handle failed[0m
+[1;31mE (177739) esp-tls: Failed to open new connection[0m
+[1;31mE (177739) transport_base: Failed to open a new connection[0m
+[1;31mE (177749) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (177749) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (187779) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (187779) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (187789) esp-tls: create_ssl_handle failed[0m
+[1;31mE (187799) esp-tls: Failed to open new connection[0m
+[1;31mE (187799) transport_base: Failed to open a new connection[0m
+[1;31mE (187809) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (187809) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (187849) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (187849) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (187859) esp-tls: create_ssl_handle failed[0m
+[1;31mE (187859) esp-tls: Failed to open new connection[0m
+[1;31mE (187859) transport_base: Failed to open a new connection[0m
+[1;31mE (187869) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (187869) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (197909) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (197909) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (197919) esp-tls: create_ssl_handle failed[0m
+[1;31mE (197919) esp-tls: Failed to open new connection[0m
+[1;31mE (197929) transport_base: Failed to open a new connection[0m
+[1;31mE (197929) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (197939) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (197969) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (197969) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (197979) esp-tls: create_ssl_handle failed[0m
+[1;31mE (197979) esp-tls: Failed to open new connection[0m
+[1;31mE (197989) transport_base: Failed to open a new connection[0m
+[1;31mE (197999) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (197999) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (208019) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (208019) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (208029) esp-tls: create_ssl_handle failed[0m
+[1;31mE (208039) esp-tls: Failed to open new connection[0m
+[1;31mE (208039) transport_base: Failed to open a new connection[0m
+[1;31mE (208049) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (208049) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (208089) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (208089) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (208099) esp-tls: create_ssl_handle failed[0m
+[1;31mE (208099) esp-tls: Failed to open new connection[0m
+[1;31mE (208109) transport_base: Failed to open a new connection[0m
+[1;31mE (208109) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (208119) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (218149) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (218149) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (218159) esp-tls: create_ssl_handle failed[0m
+[1;31mE (218159) esp-tls: Failed to open new connection[0m
+[1;31mE (218159) transport_base: Failed to open a new connection[0m
+[1;31mE (218169) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (218169) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (218209) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (218209) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (218219) esp-tls: create_ssl_handle failed[0m
+[1;31mE (218219) esp-tls: Failed to open new connection[0m
+[1;31mE (218229) transport_base: Failed to open a new connection[0m
+[1;31mE (218239) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (218239) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (228259) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (228259) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (228269) esp-tls: create_ssl_handle failed[0m
+[1;31mE (228279) esp-tls: Failed to open new connection[0m
+[1;31mE (228279) transport_base: Failed to open a new connection[0m
+[1;31mE (228289) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (228289) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (228329) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (228329) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (228339) esp-tls: create_ssl_handle failed[0m
+[1;31mE (228339) esp-tls: Failed to open new connection[0m
+[1;31mE (228349) transport_base: Failed to open a new connection[0m
+[1;31mE (228359) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (228359) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (238379) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (238379) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (238389) esp-tls: create_ssl_handle failed[0m
+[1;31mE (238399) esp-tls: Failed to open new connection[0m
+[1;31mE (238399) transport_base: Failed to open a new connection[0m
+[1;31mE (238409) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (238409) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (238449) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (238449) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (238459) esp-tls: create_ssl_handle failed[0m
+[1;31mE (238459) esp-tls: Failed to open new connection[0m
+[1;31mE (238469) transport_base: Failed to open a new connection[0m
+[1;31mE (238469) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (238479) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (248499) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (248499) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (248509) esp-tls: create_ssl_handle failed[0m
+[1;31mE (248519) esp-tls: Failed to open new connection[0m
+[1;31mE (248519) transport_base: Failed to open a new connection[0m
+[1;31mE (248529) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (248529) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (248569) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (248569) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (248579) esp-tls: create_ssl_handle failed[0m
+[1;31mE (248579) esp-tls: Failed to open new connection[0m
+[1;31mE (248589) transport_base: Failed to open a new connection[0m
+[1;31mE (248599) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (248599) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (258619) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (258619) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (258629) esp-tls: create_ssl_handle failed[0m
+[1;31mE (258639) esp-tls: Failed to open new connection[0m
+[1;31mE (258639) transport_base: Failed to open a new connection[0m
+[1;31mE (258649) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (258649) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (258989) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (258989) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (258999) esp-tls: create_ssl_handle failed[0m
+[1;31mE (258999) esp-tls: Failed to open new connection[0m
+[1;31mE (259009) transport_base: Failed to open a new connection[0m
+[1;31mE (259019) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (259019) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (269039) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (269039) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (269049) esp-tls: create_ssl_handle failed[0m
+[1;31mE (269059) esp-tls: Failed to open new connection[0m
+[1;31mE (269059) transport_base: Failed to open a new connection[0m
+[1;31mE (269069) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (269069) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (269109) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (269109) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (269119) esp-tls: create_ssl_handle failed[0m
+[1;31mE (269119) esp-tls: Failed to open new connection[0m
+[1;31mE (269129) transport_base: Failed to open a new connection[0m
+[1;31mE (269129) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (269139) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (279159) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (279159) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (279169) esp-tls: create_ssl_handle failed[0m
+[1;31mE (279179) esp-tls: Failed to open new connection[0m
+[1;31mE (279179) transport_base: Failed to open a new connection[0m
+[1;31mE (279189) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (279189) MONITOR: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT[0m
+[1;31mE (279229) esp-tls-mbedtls: No server verification option set in esp_tls_cfg_t structure. Check esp_tls API reference[0m
+[1;31mE (279229) esp-tls-mbedtls: Failed to set client configurations, returned [0x8017] (ESP_ERR_MBEDTLS_SSL_SETUP_FAILED)[0m
+[1;31mE (279239) esp-tls: create_ssl_handle failed[0m
+[1;31mE (279239) esp-tls: Failed to open new connection[0m
+[1;31mE (279239) transport_base: Failed to open a new connection[0m
+[1;31mE (279249) HTTP_CLIENT: Connection failed, sock < 0[0m
+[1;31mE (279249) MONITOR: Błąd wysyłania webhooka: ESP_ERR_HTTP_CONNECT[0m

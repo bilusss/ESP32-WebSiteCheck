@@ -16,9 +16,6 @@
 /Users/bilus/CLionProjects/ESP32Files/monitor/build/CMakeFiles/size-components.dir
 /Users/bilus/CLionProjects/ESP32Files/monitor/build/CMakeFiles/uf2.dir
 /Users/bilus/CLionProjects/ESP32Files/monitor/build/CMakeFiles/uf2-app.dir
-/Users/bilus/CLionProjects/ESP32Files/monitor/build/CMakeFiles/spiffs_spiffs_bin.dir
-/Users/bilus/CLionProjects/ESP32Files/monitor/build/CMakeFiles/spiffs-flash.dir
-/Users/bilus/CLionProjects/ESP32Files/monitor/build/CMakeFiles/encrypted-spiffs-flash.dir
 /Users/bilus/CLionProjects/ESP32Files/monitor/build/CMakeFiles/edit_cache.dir
 /Users/bilus/CLionProjects/ESP32Files/monitor/build/CMakeFiles/rebuild_cache.dir
 /Users/bilus/CLionProjects/ESP32Files/monitor/build/CMakeFiles/list_install_components.dir

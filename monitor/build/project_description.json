@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "monitor",
-    "project_version":    "37c0fc9-dirty",
+    "project_version":    "5b52729-dirty",
     "project_path":       "/Users/bilus/CLionProjects/ESP32Files/monitor",
     "idf_path":           "/Users/bilus/esp/esp-idf",
     "build_dir":          "/Users/bilus/CLionProjects/ESP32Files/monitor/build",

@@ -19,7 +19,6 @@ if("${CONFIG}" STREQUAL "" OR "${CONFIG}" STREQUAL "")
   "monitor.bin"
   "monitor.map"
   "project_elf_src_esp32.c"
-  "spiffs.bin"
   "x509_crt_bundle.S"
   )
 endif()

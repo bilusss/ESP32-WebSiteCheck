@@ -1,203 +1,194 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <esp_http_client.h>
-#include <esp_wifi.h>
-#include <esp_event.h>
-#include <esp_log.h>
-#include <nvs_flash.h>
-#include <freertos/FreeRTOS.h>
-#include <freertos/task.h>
-#include <mbedtls/md5.h>
-#include <esp_spiffs.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "esp_system.h"
+#include "esp_wifi.h"
+#include "esp_event.h"
+#include "esp_log.h"
+#include "nvs_flash.h"
+#include "esp_http_client.h"
 
-char WIFI_SSID[32] = "default_ssid";
-char WIFI_PASS[64] = "default_pass";
-char WEBHOOK_STATUS[128] = ""; // Domyślnie pusty
-char WEBHOOK_CHANGE[128] = ""; // Domyślnie pusty
+// Definicje
+#define WIFI_SSID "router"
+#define WIFI_PASS "qwerty000"
+#define DISCORD_WEBHOOK_STATUS "https://discord.com/api/webhooks/1352055964282388530/xpAbO0FhnFfSdmzvFUqot9doxNdQiBi5NknNCTU1NFCgXPDmcdzJ_dQjMiBSdKIiySi1"
+#define DISCORD_WEBHOOK_CHANGE "https://discord.com/api/webhooks/1352043110716411990/tl118UmEJPpnom3ziT3mo8FD7i3OCSqSWPpZzki4Vj-awxtsriR7bFHNdXg79xRenXMD"
+#define DISCORD_TTS "false"
+#define WEBSITE_URL "https://sabre.wd1.myworkdayjobs.com/SabreJobs?locationCountry=131d5ac7e3ee4d7b962bdc96e498e412"
+static const char *TAG = "DISCORD";
 
-#define TARGET_URL "https://sabre.wd1.myworkdayjobs.com/SabreJobs?locationCountry=131d5ac7e3ee4d7b962bdc96e498e412"
+// Certyfikat Discord (taki sam jak w Twoim kodzie)
+const char *DISCORD_CERT = R"(
+-----BEGIN CERTIFICATE-----
+MIIDejCCAmKgAwIBAgIQf+UwvzMTQ77dghYQST2KGzANBgkqhkiG9w0BAQsFADBX
+MQswCQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTEQMA4GA1UE
+CxMHUm9vdCBDQTEbMBkGA1UEAxMSR2xvYmFsU2lnbiBSb290IENBMB4XDTIzMTEx
+NTAzNDMyMVoXDTI4MDEyODAwMDA0MlowRzELMAkGA1UEBhMCVVMxIjAgBgNVBAoT
+GUdvb2dsZSBUcnVzdCBTZXJ2aWNlcyBMTEMxFDASBgNVBAMTC0dUUyBSb290IFI0
+MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE83Rzp2iLYK5DuDXFgTB7S0md+8Fhzube
+Rr1r1WEYNa5A3XP3iZEwWus87oV8okB2O6nGuEfYKueSkWpz6bFyOZ8pn6KY019e
+WIZlD6GEZQbR3IvJx3PIjGov5cSr0R2Ko4H/MIH8MA4GA1UdDwEB/wQEAwIBhjAd
+BgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDwYDVR0TAQH/BAUwAwEB/zAd
+BgNVHQ4EFgQUgEzW63T/STaj1dj8tT7FavCUHYwwHwYDVR0jBBgwFoAUYHtmGkUN
+l8qJUC99BM00qP/8/UswNgYIKwYBBQUHAQEEKjAoMCYGCCsGAQUFBzAChhpodHRw
+Oi8vaS5wa2kuZ29vZy9nc3IxLmNydDAtBgNVHR8EJjAkMCKgIKAehhxodHRwOi8v
+Yy5wa2kuZ29vZy9yL2dzcjEuY3JsMBMGA1UdIAQMMAowCAYGZ4EMAQIBMA0GCSqG
+SIb3DQEBCwUAA4IBAQAYQrsPBtYDh5bjP2OBDwmkoWhIDDkic574y04tfzHpn+cJ
+odI2D4SseesQ6bDrarZ7C30ddLibZatoKiws3UL9xnELz4ct92vID24FfVbiI1hY
++SW6FoVHkNeWIP0GCbaM4C6uVdF5dTUsMVs/ZbzNnIdCp5Gxmx5ejvEau8otR/Cs
+kGN+hr/W5GvT1tMBjgWKZ1i4//emhA1JG1BbPzoLJQvyEotc03lXjTaCzv8mEbep
+8RqZ7a2CPsgRbuvTPBwcOMBBmuFeU88+FSBX6+7iP0il8b4Z0QFqIwwMHfs/L6K1
+vepuoxtGzi4CZ68zJpiq1UvSqTbFJjtbD4seiMHl
+-----END CERTIFICATE-----
+)";
 
-static const char *TAG = "MONITOR";
-static char prev_checksum[33] = "00000000000000000000000000000000";
-
-void load_config(void) {
-    FILE *f = fopen("/spiffs/config.txt", "r");
-    if (f == NULL) {
-        ESP_LOGE(TAG, "Nie udało się otworzyć pliku config.txt");
-        return;
+// Inicjalizacja NVS (Non-Volatile Storage)
+static void init_nvs(void) {
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
     }
-
-    char line[128];
-    while (fgets(line, sizeof(line), f) != NULL) {
-        line[strcspn(line, "\n")] = 0;
-        char *key = strtok(line, "=");
-        char *value = strtok(NULL, "=");
-        if (key && value) {
-            if (strcmp(key, "SSID") == 0) {
-                strncpy(WIFI_SSID, value, sizeof(WIFI_SSID) - 1);
-            } else if (strcmp(key, "PASSWORD") == 0) {
-                strncpy(WIFI_PASS, value, sizeof(WIFI_PASS) - 1);
-            } else if (strcmp(key, "WEBHOOK_STATUS") == 0) {
-                strncpy(WEBHOOK_STATUS, value, sizeof(WEBHOOK_STATUS) - 1);
-            } else if (strcmp(key, "WEBHOOK_CHANGE") == 0) {
-                strncpy(WEBHOOK_CHANGE, value, sizeof(WEBHOOK_CHANGE) - 1);
-            }
-        }
-    }
-    fclose(f);
-
-    // Sprawdzenie, czy webhooki zostały wczytane
-    if (strlen(WEBHOOK_STATUS) == 0) {
-        ESP_LOGE(TAG, "WEBHOOK_STATUS nie został wczytany z config.txt");
-    }
-    if (strlen(WEBHOOK_CHANGE) == 0) {
-        ESP_LOGE(TAG, "WEBHOOK_CHANGE nie został wczytany z config.txt");
-    }
-
-    ESP_LOGI(TAG, "Konfiguracja załadowana: SSID=%s", WIFI_SSID);
+    ESP_ERROR_CHECK(ret);
 }
 
-void spiffs_init(void) {
-    esp_vfs_spiffs_conf_t conf = {
-        .base_path = "/spiffs",
-        .partition_label = NULL,
-        .max_files = 5,
-        .format_if_mount_failed = true
-    };
-    esp_vfs_spiffs_register(&conf);
-}
-
+// Obsługa zdarzeń Wi-Fi
 static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data) {
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
         esp_wifi_connect();
-        sleep(5);
     } else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
-        ESP_LOGI(TAG, "Połączono z Wi-Fi i uzyskano IP");
+        ip_event_got_ip_t *event = (ip_event_got_ip_t *)event_data;
+        ESP_LOGI(TAG, "Got IP: " IPSTR, IP2STR(&event->ip_info.ip));
+    } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
+        esp_wifi_connect();
+        ESP_LOGI(TAG, "Disconnected. Reconnecting to Wi-Fi...");
     }
 }
 
-void wifi_init(void) {
-    esp_netif_init();
-    esp_event_loop_create_default();
+// Inicjalizacja Wi-Fi
+static void init_wifi(void) {
+    ESP_ERROR_CHECK(esp_netif_init());
+    ESP_ERROR_CHECK(esp_event_loop_create_default());
     esp_netif_create_default_wifi_sta();
-    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
-    esp_wifi_init(&cfg);
 
-    esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler, NULL);
-    esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &wifi_event_handler, NULL);
+    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
+    ESP_ERROR_CHECK(esp_wifi_init(&cfg));
+
+    ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler, NULL));
+    ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &wifi_event_handler, NULL));
 
     wifi_config_t wifi_config = {
         .sta = {
-            .ssid = "",
-            .password = "",
+            .ssid = WIFI_SSID,
+            .password = WIFI_PASS,
         },
     };
-    strncpy((char *)wifi_config.sta.ssid, WIFI_SSID, sizeof(wifi_config.sta.ssid) - 1);
-    strncpy((char *)wifi_config.sta.password, WIFI_PASS, sizeof(wifi_config.sta.password) - 1);
+    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
+    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
+    ESP_ERROR_CHECK(esp_wifi_start());
 
-    esp_wifi_set_mode(WIFI_MODE_STA);
-    esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config);
-    esp_wifi_start();
+    ESP_LOGI(TAG, "Wi-Fi initialized. Connecting to %s...", WIFI_SSID);
 }
 
-static void get_page_and_checksum(char *checksum) {
+// Funkcja wysyłająca wiadomość do Discorda
+static esp_err_t send_discord_message(const char *content) {
     esp_http_client_config_t config = {
-        .url = TARGET_URL,
-    };
-    esp_http_client_handle_t client = esp_http_client_init(&config);
-    esp_http_client_open(client, 0);
-    char buffer[1024];
-    int len = esp_http_client_fetch_headers(client);
-    int total_len = 0;
-
-    unsigned char md5_result[16];
-    mbedtls_md5_context md5_ctx;
-    mbedtls_md5_init(&md5_ctx);
-    mbedtls_md5_starts(&md5_ctx);
-
-    while ((len = esp_http_client_read(client, buffer, sizeof(buffer))) > 0) {
-        mbedtls_md5_update(&md5_ctx, (unsigned char *)buffer, len);
-        total_len += len;
-    }
-
-    mbedtls_md5_finish(&md5_ctx, md5_result);
-    mbedtls_md5_free(&md5_ctx);
-
-    for (int i = 0; i < 16; i++) {
-        sprintf(checksum + (i * 2), "%02x", md5_result[i]);
-    }
-    esp_http_client_cleanup(client);
-}
-
-static void send_webhook(const char *url, const char *message) {
-    // Sprawdź, czy URL jest pusty
-    if (strlen(url) == 0) {
-        ESP_LOGE(TAG, "URL webhooka jest pusty, pomijam wysyłanie");
-        return;
-    }
-
-    // Przygotuj dane JSON
-    char post_data[256];
-    snprintf(post_data, sizeof(post_data), "{\"content\":\"%s\"}", message);
-
-    esp_http_client_config_t config = {
-        .url = url,
+        .url = DISCORD_WEBHOOK_STATUS,
+        .cert_pem = DISCORD_CERT,
         .method = HTTP_METHOD_POST,
     };
     esp_http_client_handle_t client = esp_http_client_init(&config);
 
-    // Ustaw nagłówki
+    char json_payload[512];
+    snprintf(json_payload, sizeof(json_payload), "{\"content\":\"%s\",\"tts\":%s}", content, DISCORD_TTS);
+
     esp_http_client_set_header(client, "Content-Type", "application/json");
+    esp_http_client_set_post_field(client, json_payload, strlen(json_payload));
 
-    // Wysłanie danych
-    esp_http_client_set_post_field(client, post_data, strlen(post_data));
     esp_err_t err = esp_http_client_perform(client);
-
     if (err == ESP_OK) {
-        ESP_LOGI(TAG, "Webhook wysłany, status=%d", esp_http_client_get_status_code(client));
+        ESP_LOGI(TAG, "HTTP POST Status = %d, content_length = %lld",
+                 esp_http_client_get_status_code(client),
+                 esp_http_client_get_content_length(client));
     } else {
-        ESP_LOGE(TAG, "Błąd wysyłania webhooka: %s", esp_err_to_name(err));
+        ESP_LOGE(TAG, "HTTP POST request failed: %s", esp_err_to_name(err));
     }
 
     esp_http_client_cleanup(client);
+    return err;
+}
+
+// Funkcja pobierająca HTML ze strony
+static char *fetch_website_html(void) {
+    esp_http_client_config_t config = {
+        .url = WEBSITE_URL,
+        .method = HTTP_METHOD_GET,
+    };
+    esp_http_client_handle_t client = esp_http_client_init(&config);
+
+    // Bufor na dane HTML
+    char *html_buffer = NULL;
+    int html_len = 0;
+
+    esp_err_t err = esp_http_client_open(client, 0);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to open HTTP connection: %s", esp_err_to_name(err));
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+
+    // Pobierz długość zawartości
+    int content_length = esp_http_client_fetch_headers(client);
+    if (content_length < 0) {
+        ESP_LOGE(TAG, "Failed to fetch headers");
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+
+    // Przydziel pamięć na HTML
+    html_buffer = (char *)malloc(content_length + 1);
+    if (html_buffer == NULL) {
+        ESP_LOGE(TAG, "Failed to allocate memory for HTML");
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+
+    // Pobierz dane
+    html_len = esp_http_client_read(client, html_buffer, content_length);
+    if (html_len < 0) {
+        ESP_LOGE(TAG, "Failed to read HTML content");
+        free(html_buffer);
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+
+    // Dodaj znak końca ciągu
+    html_buffer[html_len] = '\0';
+
+    ESP_LOGI(TAG, "Fetched HTML length: %d bytes", html_len);
+
+    esp_http_client_close(client);
+    esp_http_client_cleanup(client);
+
+    return html_buffer;
 }
 
 void app_main(void) {
-    esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-        nvs_flash_erase();
-        nvs_flash_init();
+    init_nvs();
+    init_wifi();
+
+    // Poczekaj na połączenie Wi-Fi (proste opóźnienie, w praktyce użyj zdarzeń)
+    vTaskDelay(5000 / portTICK_PERIOD_MS);
+
+    // Testowe pobranie HTML
+    char *html = fetch_website_html();
+    if (html != NULL) {
+        ESP_LOGI(TAG, "Website HTML: %s", html);
+        free(html); // Zwolnij pamięć po użyciu
+    } else {
+        ESP_LOGE(TAG, "Failed to fetch website HTML");
     }
-
-    spiffs_init();
-    load_config();
-
-    wifi_init();
-
-    char checksum[33];
-    char message[128];
-
-    while (1) {
-        get_page_and_checksum(checksum);
-
-        time_t now;
-        time(&now);
-        char *time_str = ctime(&now);
-        time_str[strlen(time_str) - 1] = '\0';
-
-        // Webhook statusu
-        snprintf(message, sizeof(message), "Status: %s, Checksum: %s", time_str, checksum);
-        send_webhook(WEBHOOK_STATUS, message);
-
-        // Webhook zmiany
-        if (strcmp(checksum, prev_checksum) != 0) {
-            snprintf(message, sizeof(message), "@everyone Suma kontrolna zmieniła się: %s", checksum);
-            send_webhook(WEBHOOK_CHANGE, message);
-            strcpy(prev_checksum, checksum);
-        }
-
-        vTaskDelay(300000 / portTICK_PERIOD_MS); // 5 minut
-    }
+    // Wyślij wiadomość testową
+    send_discord_message("test");
 }

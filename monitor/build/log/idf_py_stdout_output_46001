@@ -1,0 +1,76 @@
+Command: ninja flash
+[1/5] cd /Users/bilus/CLionProjects/ESP32Files/monitor/build/esp-idf/esptool_py && /Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python /Users/bilus/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /Users/bilus/CLionProjects/ESP32Files/monitor/build/partition_table/partition-table.bin /Users/bilus/CLionProjects/ESP32Files/monitor/build/monitor.bin
+monitor.bin binary size 0xd6200 bytes. Smallest app partition is 0x100000 bytes. 0x29e00 bytes (16%) free.
+[2/5] Performing build step for 'bootloader'
+[1/1] cd /Users/bilus/CLionProjects/ESP32Files/monitor/build/bootloader/esp-idf/esptool_py && /Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python /Users/bilus/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /Users/bilus/CLionProjects/ESP32Files/monitor/build/bootloader/bootloader.bin
+Bootloader binary size 0x6650 bytes. 0x9b0 bytes (9%) free.
+[3/5] No install step for 'bootloader'
+[4/5] Completed 'bootloader'
+[4/5] cd /Users/bilus/esp/esp-idf/components/esptool_py && /Users/bilus/.espressif/tools/cmake/3.30.2/CMake.app/Contents/bin/cmake -D IDF_PATH=/Users/bilus/esp/esp-idf -D "SERIAL_TOOL=/Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python;;/Users/bilus/esp/esp-idf/components/esptool_py/esptool/esptool.py;--chip;esp32" -D "SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args" -D WORKING_DIRECTORY=/Users/bilus/CLionProjects/ESP32Files/monitor/build -P /Users/bilus/esp/esp-idf/components/esptool_py/run_serial_tool.cmake
+esptool.py --chip esp32 -p /dev/cu.usbserial-1120 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size 2MB 0x1000 bootloader/bootloader.bin 0x10000 monitor.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.9.dev6
+Serial port /dev/cu.usbserial-1120
+Connecting......
+Chip is ESP32-D0WD-V3 (revision v3.1)
+Features: WiFi, BT, Dual Core, 240MHz, VRef calibration in efuse, Coding Scheme None
+Crystal is 40MHz
+MAC: 94:54:c5:74:db:dc
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00001000 to 0x00007fff...
+Flash will be erased from 0x00010000 to 0x000e6fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+SHA digest in image updated
+Compressed 26192 bytes to 16505...
+Writing at 0x00001000... (50 %)
+Writing at 0x000075ae... (100 %)
+Wrote 26192 bytes (16505 compressed) at 0x00001000 in 0.8 seconds (effective 273.3 kbit/s)...
+Hash of data verified.
+Compressed 877056 bytes to 553168...
+Writing at 0x00010000... (2 %)
+Writing at 0x0001b9b7... (5 %)
+Writing at 0x00025909... (8 %)
+Writing at 0x000308c2... (11 %)
+Writing at 0x00036060... (14 %)
+Writing at 0x0003bfd6... (17 %)
+Writing at 0x00041c22... (20 %)
+Writing at 0x00047c58... (23 %)
+Writing at 0x0004d900... (26 %)
+Writing at 0x00053f5d... (29 %)
+Writing at 0x00059169... (32 %)
+Writing at 0x0005e4e8... (35 %)
+Writing at 0x00063c6b... (38 %)
+Writing at 0x00069463... (41 %)
+Writing at 0x0006e743... (44 %)
+Writing at 0x00073cb8... (47 %)
+Writing at 0x00079c18... (50 %)
+Writing at 0x0007f748... (52 %)
+Writing at 0x00084fc6... (55 %)
+Writing at 0x0008abee... (58 %)
+Writing at 0x000909b6... (61 %)
+Writing at 0x000961fd... (64 %)
+Writing at 0x0009bfed... (67 %)
+Writing at 0x000a22ea... (70 %)
+Writing at 0x000a7dea... (73 %)
+Writing at 0x000ad947... (76 %)
+Writing at 0x000b33a5... (79 %)
+Writing at 0x000b908f... (82 %)
+Writing at 0x000c35fe... (85 %)
+Writing at 0x000c9a4b... (88 %)
+Writing at 0x000d0abc... (91 %)
+Writing at 0x000d6526... (94 %)
+Writing at 0x000dc95a... (97 %)
+Writing at 0x000e1c06... (100 %)
+Wrote 877056 bytes (553168 compressed) at 0x00010000 in 14.0 seconds (effective 500.5 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 118...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (118 compressed) at 0x00008000 in 0.1 seconds (effective 476.2 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...
