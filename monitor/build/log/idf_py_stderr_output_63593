@@ -1,0 +1,341 @@
+Command: /Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python /Users/bilus/esp/esp-idf/tools/idf_monitor.py -p /dev/cu.usbserial-120 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 /Users/bilus/CLionProjects/ESP32Files/monitor/build/monitor.elf /Users/bilus/CLionProjects/ESP32Files/monitor/build/bootloader/bootloader.elf -m '/Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python' '/Users/bilus/esp/esp-idf/tools/idf.py'
+[0;33m--- esp-idf-monitor 1.5.0 on /dev/cu.usbserial-120 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+0x40100295: mbedtls_mpi_grow at /Users/bilus/esp/esp-idf/components/mbedtls/mbedtls/library/bignum.c:218
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+0x40108075: mbedtls_calloc at /Users/bilus/esp/esp-idf/components/mbedtls/mbedtls/library/platform.c:49
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+0x4000bff0: _xtos_set_intlevel in ROM
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0;33m--- 0x40081a35: panic_abort at /Users/bilus/esp/esp-idf/components/esp_system/panic.c:468
+0x40088a0d: esp_system_abort at /Users/bilus/esp/esp-idf/components/esp_system/port/esp_system_chip.c:87
+0x4008985a: vApplicationStackOverflowHook at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+0x4008ab9f: vTaskSwitchContext at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3710 (discriminator 7)
+0x40089964: _frxt_dispatch at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+0x40089916: _frxt_int_exit at /Users/bilus/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+[0m
+[0;33m--- 0x40080400: _invalid_pc_placeholder at /Users/bilus/esp/esp-idf/components/xtensa/xtensa_vectors.S:2235
+[0m
+[0;33m--- 0x40080638: call_start_cpu0 at /Users/bilus/esp/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+[0m
+[0m

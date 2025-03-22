@@ -1,0 +1,18 @@
+Command: ninja all
+[1/9] Performing build step for 'bootloader'
+[1/1] cd /Users/bilus/CLionProjects/ESP32Files/monitor/build/bootloader/esp-idf/esptool_py && /Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python /Users/bilus/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /Users/bilus/CLionProjects/ESP32Files/monitor/build/bootloader/bootloader.bin
+Bootloader binary size 0x6650 bytes. 0x9b0 bytes (9%) free.
+[2/9] No install step for 'bootloader'
+[3/9] Completed 'bootloader'
+[4/9] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/monitor.c.obj
+[5/9] Linking C static library esp-idf/main/libmain.a
+[6/9] Generating ld/sections.ld
+[7/9] Linking CXX executable monitor.elf
+[8/9] Generating binary image from built executable
+esptool.py v4.9.dev6
+Creating esp32 image...
+Merged 2 ELF sections
+Successfully created esp32 image.
+Generated /Users/bilus/CLionProjects/ESP32Files/monitor/build/monitor.bin
+[9/9] cd /Users/bilus/CLionProjects/ESP32Files/monitor/build/esp-idf/esptool_py && /Users/bilus/.espressif/python_env/idf5.5_py3.13_env/bin/python /Users/bilus/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /Users/bilus/CLionProjects/ESP32Files/monitor/build/partition_table/partition-table.bin /Users/bilus/CLionProjects/ESP32Files/monitor/build/monitor.bin
+monitor.bin binary size 0xeb710 bytes. Smallest app partition is 0x100000 bytes. 0x148f0 bytes (8%) free.

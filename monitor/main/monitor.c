@@ -8,17 +8,23 @@
 #include "esp_log.h"
 #include "nvs_flash.h"
 #include "esp_http_client.h"
+#include "esp_crt_bundle.h"
+#include "time.h"
+#include "lwip/apps/sntp.h"
 
 // Definicje
 #define WIFI_SSID "router"
 #define WIFI_PASS "qwerty000"
 #define DISCORD_WEBHOOK_STATUS "https://discord.com/api/webhooks/1352055964282388530/xpAbO0FhnFfSdmzvFUqot9doxNdQiBi5NknNCTU1NFCgXPDmcdzJ_dQjMiBSdKIiySi1"
 #define DISCORD_WEBHOOK_CHANGE "https://discord.com/api/webhooks/1352043110716411990/tl118UmEJPpnom3ziT3mo8FD7i3OCSqSWPpZzki4Vj-awxtsriR7bFHNdXg79xRenXMD"
+#define DISCORD_WEBHOOK_ERRORS "https://discord.com/api/webhooks/1352976327250149487/A6iPf0QEBJ7CS5bv87aAgG-wMOZToIBLzOJV2pPPmytPrG_6RSC6UyEwfAFbKNzmq1bR"
 #define DISCORD_TTS "false"
-#define WEBSITE_URL "https://sabre.wd1.myworkdayjobs.com/SabreJobs?locationCountry=131d5ac7e3ee4d7b962bdc96e498e412"
-static const char *TAG = "DISCORD";
+#define WEBSITE_URL "https://www.example.com"
+static const char *TAG_DISCORD = "DISCORD";
+static const char *TAG_WIFI = "WIFI";
+static const char *TAG_WEBSITE = "WEBSITE";
+static const char *TAG_SNTP = "SNTP";
 
-// Certyfikat Discord (taki sam jak w Twoim kodzie)
 const char *DISCORD_CERT = R"(
 -----BEGIN CERTIFICATE-----
 MIIDejCCAmKgAwIBAgIQf+UwvzMTQ77dghYQST2KGzANBgkqhkiG9w0BAQsFADBX
@@ -59,10 +65,10 @@ static void wifi_event_handler(void *arg, esp_event_base_t event_base, int32_t e
         esp_wifi_connect();
     } else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
         ip_event_got_ip_t *event = (ip_event_got_ip_t *)event_data;
-        ESP_LOGI(TAG, "Got IP: " IPSTR, IP2STR(&event->ip_info.ip));
+        ESP_LOGI(TAG_WIFI, "Got IP: " IPSTR, IP2STR(&event->ip_info.ip));
     } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
         esp_wifi_connect();
-        ESP_LOGI(TAG, "Disconnected. Reconnecting to Wi-Fi...");
+        ESP_LOGI(TAG_WIFI, "Disconnected. Reconnecting to Wi-Fi...");
     }
 }
 
@@ -88,76 +94,100 @@ static void init_wifi(void) {
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
     ESP_ERROR_CHECK(esp_wifi_start());
 
-    ESP_LOGI(TAG, "Wi-Fi initialized. Connecting to %s...", WIFI_SSID);
+    ESP_LOGI(TAG_WIFI, "Wi-Fi initialized. Connecting to %s...", WIFI_SSID);
 }
 
 // Funkcja wysyłająca wiadomość do Discorda
-static esp_err_t send_discord_message(const char *content) {
+static esp_err_t send_discord_message(const char *content, const int discordChannel) {
     esp_http_client_config_t config = {
-        .url = DISCORD_WEBHOOK_STATUS,
         .cert_pem = DISCORD_CERT,
         .method = HTTP_METHOD_POST,
     };
+    if (discordChannel == 0) {
+        config.url = DISCORD_WEBHOOK_STATUS;
+    } else if (discordChannel == 1) {
+        config.url = DISCORD_WEBHOOK_CHANGE;
+    }
     esp_http_client_handle_t client = esp_http_client_init(&config);
 
-    char json_payload[512];
-    snprintf(json_payload, sizeof(json_payload), "{\"content\":\"%s\",\"tts\":%s}", content, DISCORD_TTS);
+    char *json_payload = malloc(1024);
+    if (json_payload == NULL) {
+        ESP_LOGE(TAG_DISCORD, "Failed to allocate json_payload");
+        esp_http_client_cleanup(client);
+        return ESP_FAIL;
+    }
+    snprintf(json_payload, 1024, "{\"content\":\"%s\",\"tts\":%s}", content, DISCORD_TTS);
 
     esp_http_client_set_header(client, "Content-Type", "application/json");
     esp_http_client_set_post_field(client, json_payload, strlen(json_payload));
 
     esp_err_t err = esp_http_client_perform(client);
     if (err == ESP_OK) {
-        ESP_LOGI(TAG, "HTTP POST Status = %d, content_length = %lld",
+        ESP_LOGI(TAG_DISCORD, "HTTP POST Status = %d, content_length = %lld",
                  esp_http_client_get_status_code(client),
                  esp_http_client_get_content_length(client));
     } else {
-        ESP_LOGE(TAG, "HTTP POST request failed: %s", esp_err_to_name(err));
+        ESP_LOGE(TAG_DISCORD, "HTTP POST request failed: %s", esp_err_to_name(err));
     }
 
+    free(json_payload);
     esp_http_client_cleanup(client);
     return err;
 }
 
 // Funkcja pobierająca HTML ze strony
 static char *fetch_website_html(void) {
-    esp_http_client_config_t config = {
-        .url = WEBSITE_URL,
-        .method = HTTP_METHOD_GET,
+    esp_http_client_config_t config = {  
+        .url = WEBSITE_URL,  
+        .method = HTTP_METHOD_GET,  
+        .crt_bundle_attach = esp_crt_bundle_attach,  
+        .user_agent = "Mozilla/5.0 (compatible; ESP32)",  // Dodaj User-Agent
+        .timeout_ms = 10000,  // Ustaw timeout na 10 sekund
     };
     esp_http_client_handle_t client = esp_http_client_init(&config);
+    if (client == NULL) {
+        ESP_LOGE(TAG_WEBSITE, "Failed to initialize HTTP client");
+        return NULL;
+    }
 
-    // Bufor na dane HTML
-    char *html_buffer = NULL;
-    int html_len = 0;
-
+    // Otwórz połączenie
     esp_err_t err = esp_http_client_open(client, 0);
     if (err != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to open HTTP connection: %s", esp_err_to_name(err));
+        ESP_LOGE(TAG_WEBSITE, "Failed to open HTTP connection: %s", esp_err_to_name(err));
         esp_http_client_cleanup(client);
         return NULL;
     }
 
-    // Pobierz długość zawartości
+    // Pobierz nagłówki i zaloguj status oraz długość treści
     int content_length = esp_http_client_fetch_headers(client);
     if (content_length < 0) {
-        ESP_LOGE(TAG, "Failed to fetch headers");
+        ESP_LOGE(TAG_WEBSITE, "Failed to fetch headers: %d", content_length);
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+    int status = esp_http_client_get_status_code(client);
+    ESP_LOGI(TAG_WEBSITE, "HTTP status: %d", status);
+    ESP_LOGI(TAG_WEBSITE, "Content length: %d", content_length);
+
+    // Sprawdź, czy status to 200 OK
+    if (status != 200) {
+        ESP_LOGE(TAG_WEBSITE, "Unexpected HTTP status: %d", status);
         esp_http_client_cleanup(client);
         return NULL;
     }
 
     // Przydziel pamięć na HTML
-    html_buffer = (char *)malloc(content_length + 1);
+    char *html_buffer = (char *)malloc(content_length + 1);
     if (html_buffer == NULL) {
-        ESP_LOGE(TAG, "Failed to allocate memory for HTML");
+        ESP_LOGE(TAG_WEBSITE, "Failed to allocate memory for HTML");
         esp_http_client_cleanup(client);
         return NULL;
     }
 
     // Pobierz dane
-    html_len = esp_http_client_read(client, html_buffer, content_length);
+    int html_len = esp_http_client_read(client, html_buffer, content_length);
     if (html_len < 0) {
-        ESP_LOGE(TAG, "Failed to read HTML content");
+        ESP_LOGE(TAG_WEBSITE, "Failed to read HTML content: %d", html_len);
         free(html_buffer);
         esp_http_client_cleanup(client);
         return NULL;
@@ -166,7 +196,7 @@ static char *fetch_website_html(void) {
     // Dodaj znak końca ciągu
     html_buffer[html_len] = '\0';
 
-    ESP_LOGI(TAG, "Fetched HTML length: %d bytes", html_len);
+    ESP_LOGI(TAG_WEBSITE, "Fetched HTML length: %d bytes", html_len);
 
     esp_http_client_close(client);
     esp_http_client_cleanup(client);
@@ -174,21 +204,136 @@ static char *fetch_website_html(void) {
     return html_buffer;
 }
 
+static uint32_t calculate_checksum(const char *data) {
+    if (data == NULL) return 0;
+    uint32_t checksum = 0;
+    while (*data) {
+        checksum += (unsigned char)(*data++);
+    }
+    return checksum;
+}
+
+// Funkcja inicjalizująca synchronizację czasu z NTP
+static void initialize_sntp(void) {
+    ESP_LOGI(TAG_SNTP, "Initializing SNTP");
+    sntp_setoperatingmode(SNTP_OPMODE_POLL);
+    sntp_setservername(0, "pool.ntp.org"); // Serwer NTP
+    sntp_init();
+    setenv("TZ", "CET-1CEST,M3.5.0,M10.5.0/3", 1); // Dla Polski (CET/CEST)
+    tzset();
+
+    // Czekaj na synchronizację czasu
+    time_t now = 0;
+    struct tm timeinfo = { 0 };
+    int retry = 0;
+    const int retry_count = 10;
+
+    while (timeinfo.tm_year < (2025 - 1900) && ++retry < retry_count) {
+        ESP_LOGI(TAG_SNTP, "Waiting for system time to be set... (%d/%d)", retry, retry_count);
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        time(&now);
+        localtime_r(&now, &timeinfo);
+    }
+
+    if (retry < retry_count) {
+        ESP_LOGI(TAG_SNTP, "Time synchronized successfully!");
+    } else {
+        ESP_LOGE(TAG_SNTP, "Failed to synchronize time");
+    }
+}
+
+// Funkcja pobierająca i formatująca aktualny czas
+void get_formatted_time(char *buffer, size_t buffer_size) {
+    time_t now;
+    struct tm timeinfo;
+
+    // Pobierz aktualny czas
+    time(&now);
+    localtime_r(&now, &timeinfo);
+
+    // Formatuj czas do postaci "godzina:minuty:sekundy dzień/miesiąc"
+    snprintf(buffer, buffer_size, "%02d:%02d:%02d %02d/%02d",
+             timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec,
+             timeinfo.tm_mday, timeinfo.tm_mon + 1); // tm_mon jest od 0, więc +1
+}
+static bool is_connected_to_internet(void) {return true;}
+
+// static bool is_connected_to_internet(void) {
+//     esp_http_client_config_t config = {
+//         .url = "http://ipv4.icanhazip.com",
+//         .method = HTTP_METHOD_GET,
+//         .crt_bundle_attach = esp_crt_bundle_attach,
+//     };
+//     esp_http_client_handle_t client = esp_http_client_new(&config);
+//     if (client == NULL) {
+//         ESP_LOGE(TAG_WIFI, "Failed to create HTTP client");
+//         return false;
+//     }
+//     esp_err_t err = esp_http_client_perform(client);
+//     esp_http_client_cleanup(client);
+//     if (err == ESP_OK) {
+//         ESP_LOGI(TAG_WIFI, "Internet connection OK");
+//         return true;
+//     } else {
+//         ESP_LOGE(TAG_WIFI, "No internet connection: %s", esp_err_to_name(err));
+//         return false;
+//     }
+// }
+
 void app_main(void) {
+    char time_str[20]; // Mały bufor, może zostać na stosie
+    uint32_t last_checksum = 0;
+
     init_nvs();
     init_wifi();
-
-    // Poczekaj na połączenie Wi-Fi (proste opóźnienie, w praktyce użyj zdarzeń)
     vTaskDelay(5000 / portTICK_PERIOD_MS);
 
-    // Testowe pobranie HTML
-    char *html = fetch_website_html();
-    if (html != NULL) {
-        ESP_LOGI(TAG, "Website HTML: %s", html);
-        free(html); // Zwolnij pamięć po użyciu
-    } else {
-        ESP_LOGE(TAG, "Failed to fetch website HTML");
+    send_discord_message("System started", 0);
+    initialize_sntp();
+
+    while (true) {
+        get_formatted_time(time_str, sizeof(time_str));
+        ESP_LOGI(TAG_SNTP, "Current time: %s", time_str);
+
+        // Dynamiczna alokacja dla status_msg
+        char *status_msg = malloc(50);
+        if (status_msg == NULL) {
+            ESP_LOGE(TAG_DISCORD, "Failed to allocate status_msg");
+            continue;
+        }
+        snprintf(status_msg, 50, "Current time: %s", time_str);
+        send_discord_message(status_msg, 0);
+        free(status_msg);
+
+        if (is_connected_to_internet()) {
+            char *html = fetch_website_html();
+            vTaskDelay(5000 / portTICK_PERIOD_MS);
+            if (html != NULL) {
+                uint32_t current_checksum = calculate_checksum(html);
+                ESP_LOGI(TAG_WEBSITE, "Checksum: %lu", current_checksum);
+
+                if (last_checksum != 0 && current_checksum != last_checksum) {
+                    // Dynamiczna alokacja dla change_msg
+                    char *change_msg = malloc(256);
+                    if (change_msg == NULL) {
+                        ESP_LOGE(TAG_DISCORD, "Failed to allocate change_msg");
+                        free(html);
+                        continue;
+                    }
+                    snprintf(change_msg, 256, "Check you the link: %s Checksum changed at %s: %lu -> %lu",
+                             WEBSITE_URL, time_str, last_checksum, current_checksum);
+                    send_discord_message(change_msg, 1);
+                    free(change_msg);
+                }
+                last_checksum = current_checksum;
+                free(html);
+            } else {
+                ESP_LOGE(TAG_WEBSITE, "Failed to fetch website HTML");
+            }
+        } else {
+            ESP_LOGE(TAG_WIFI, "No internet connection, skipping website fetch");
+        }
+
+        vTaskDelay(300000 / portTICK_PERIOD_MS);
     }
-    // Wyślij wiadomość testową
-    send_discord_message("test");
 }
