@@ -19,7 +19,11 @@
 #define DISCORD_WEBHOOK_CHANGE "https://discord.com/api/webhooks/1352043110716411990/tl118UmEJPpnom3ziT3mo8FD7i3OCSqSWPpZzki4Vj-awxtsriR7bFHNdXg79xRenXMD"
 #define DISCORD_WEBHOOK_ERRORS "https://discord.com/api/webhooks/1352976327250149487/A6iPf0QEBJ7CS5bv87aAgG-wMOZToIBLzOJV2pPPmytPrG_6RSC6UyEwfAFbKNzmq1bR"
 #define DISCORD_TTS "false"
-#define WEBSITE_URL "https://www.example.com"
+#define TARGET_URL "https://sabre.wd1.myworkdayjobs.com/SabreJobs?locationCountry=131d5ac7e3ee4d7b962bdc96e498e412"
+#define SCRAPINGBEE_API_KEY "ATSI3ZGN4G9VEZ0P145YCI52HIR98IBX88Z6YH8VMLX0A5MFKA9G8INPGGNETAQCLAYO7KK8HRJQ1CC7"
+#define GRABZIT_API_KEY "YjQwYmE3MDFjOThkNGY5ZWIxYmJjZTM3YmM5NDIzNjM"
+#define SCRAPINGBEE_URL "https://app.scrapingbee.com/api/v1/?api_key=" SCRAPINGBEE_API_KEY "&url=" TARGET_URL "&render_js=true"
+#define GRABZIT_URL "https://api.grabz.it/services/convert.ashx?key=" GRABZIT_API_KEY "&delay=3000&format=html&url=" TARGET_URL
 static const char *TAG_DISCORD = "DISCORD";
 static const char *TAG_WIFI = "WIFI";
 static const char *TAG_WEBSITE = "WEBSITE";
@@ -135,73 +139,78 @@ static esp_err_t send_discord_message(const char *content, const int discordChan
     return err;
 }
 
-// Funkcja pobierająca HTML ze strony
-static char *fetch_website_html(void) {
+// Funkcja pobierająca HTML z usługi (GrabzIt lub ScrapingBee)
+static char *fetch_from_service(const char *service_url, const char *service_name) {
     esp_http_client_config_t config = {  
-        .url = WEBSITE_URL,  
+        .url = service_url,  
         .method = HTTP_METHOD_GET,  
         .crt_bundle_attach = esp_crt_bundle_attach,  
-        .user_agent = "Mozilla/5.0 (compatible; ESP32)",  // Dodaj User-Agent
-        .timeout_ms = 10000,  // Ustaw timeout na 10 sekund
+        .user_agent = "Mozilla/5.0 (compatible; ESP32)",  
+        .timeout_ms = 10000,  
     };
     esp_http_client_handle_t client = esp_http_client_init(&config);
     if (client == NULL) {
-        ESP_LOGE(TAG_WEBSITE, "Failed to initialize HTTP client");
+        ESP_LOGE(TAG_WEBSITE, "Failed to initialize HTTP client for %s", service_name);
         return NULL;
     }
 
-    // Otwórz połączenie
     esp_err_t err = esp_http_client_open(client, 0);
     if (err != ESP_OK) {
-        ESP_LOGE(TAG_WEBSITE, "Failed to open HTTP connection: %s", esp_err_to_name(err));
+        ESP_LOGE(TAG_WEBSITE, "Failed to open HTTP connection for %s: %s", service_name, esp_err_to_name(err));
         esp_http_client_cleanup(client);
         return NULL;
     }
 
-    // Pobierz nagłówki i zaloguj status oraz długość treści
     int content_length = esp_http_client_fetch_headers(client);
     if (content_length < 0) {
-        ESP_LOGE(TAG_WEBSITE, "Failed to fetch headers: %d", content_length);
+        ESP_LOGE(TAG_WEBSITE, "Failed to fetch headers for %s: %d", service_name, content_length);
         esp_http_client_cleanup(client);
         return NULL;
     }
     int status = esp_http_client_get_status_code(client);
-    ESP_LOGI(TAG_WEBSITE, "HTTP status: %d", status);
-    ESP_LOGI(TAG_WEBSITE, "Content length: %d", content_length);
+    ESP_LOGI(TAG_WEBSITE, "%s HTTP status: %d", service_name, status);
+    ESP_LOGI(TAG_WEBSITE, "%s Content length: %d", service_name, content_length);
 
-    // Sprawdź, czy status to 200 OK
     if (status != 200) {
-        ESP_LOGE(TAG_WEBSITE, "Unexpected HTTP status: %d", status);
+        ESP_LOGE(TAG_WEBSITE, "Unexpected HTTP status from %s: %d", service_name, status);
         esp_http_client_cleanup(client);
         return NULL;
     }
 
-    // Przydziel pamięć na HTML
     char *html_buffer = (char *)malloc(content_length + 1);
     if (html_buffer == NULL) {
-        ESP_LOGE(TAG_WEBSITE, "Failed to allocate memory for HTML");
+        ESP_LOGE(TAG_WEBSITE, "Failed to allocate memory for HTML from %s", service_name);
         esp_http_client_cleanup(client);
         return NULL;
     }
 
-    // Pobierz dane
     int html_len = esp_http_client_read(client, html_buffer, content_length);
     if (html_len < 0) {
-        ESP_LOGE(TAG_WEBSITE, "Failed to read HTML content: %d", html_len);
+        ESP_LOGE(TAG_WEBSITE, "Failed to read HTML content from %s: %d", service_name, html_len);
         free(html_buffer);
         esp_http_client_cleanup(client);
         return NULL;
     }
 
-    // Dodaj znak końca ciągu
     html_buffer[html_len] = '\0';
-
-    ESP_LOGI(TAG_WEBSITE, "Fetched HTML length: %d bytes", html_len);
+    ESP_LOGI(TAG_WEBSITE, "Fetched HTML length from %s: %d bytes", service_name, html_len);
 
     esp_http_client_close(client);
     esp_http_client_cleanup(client);
 
     return html_buffer;
+}
+
+// Funkcja pobierająca HTML ze strony, najpierw z GrabzIt, potem z ScrapingBee
+static char *fetch_website_html(void) {
+    char *html = fetch_from_service(GRABZIT_URL, "GrabzIt");
+    vTaskDelay(5000 / portTICK_PERIOD_MS);
+    if (html == NULL || html == 0) {
+        ESP_LOGW(TAG_WEBSITE, "Failed to fetch from GrabzIt, trying ScrapingBee");
+        html = fetch_from_service(SCRAPINGBEE_URL, "ScrapingBee");
+        vTaskDelay(5000 / portTICK_PERIOD_MS);
+    }
+    return html;
 }
 
 static uint32_t calculate_checksum(const char *data) {
@@ -217,12 +226,11 @@ static uint32_t calculate_checksum(const char *data) {
 static void initialize_sntp(void) {
     ESP_LOGI(TAG_SNTP, "Initializing SNTP");
     sntp_setoperatingmode(SNTP_OPMODE_POLL);
-    sntp_setservername(0, "pool.ntp.org"); // Serwer NTP
+    sntp_setservername(0, "pool.ntp.org");
     sntp_init();
-    setenv("TZ", "CET-1CEST,M3.5.0,M10.5.0/3", 1); // Dla Polski (CET/CEST)
+    setenv("TZ", "CET-1CEST,M3.5.0,M10.5.0/3", 1);
     tzset();
 
-    // Czekaj na synchronizację czasu
     time_t now = 0;
     struct tm timeinfo = { 0 };
     int retry = 0;
@@ -247,41 +255,18 @@ void get_formatted_time(char *buffer, size_t buffer_size) {
     time_t now;
     struct tm timeinfo;
 
-    // Pobierz aktualny czas
     time(&now);
     localtime_r(&now, &timeinfo);
 
-    // Formatuj czas do postaci "godzina:minuty:sekundy dzień/miesiąc"
     snprintf(buffer, buffer_size, "%02d:%02d:%02d %02d/%02d",
              timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec,
-             timeinfo.tm_mday, timeinfo.tm_mon + 1); // tm_mon jest od 0, więc +1
+             timeinfo.tm_mday, timeinfo.tm_mon + 1);
 }
-static bool is_connected_to_internet(void) {return true;}
 
-// static bool is_connected_to_internet(void) {
-//     esp_http_client_config_t config = {
-//         .url = "http://ipv4.icanhazip.com",
-//         .method = HTTP_METHOD_GET,
-//         .crt_bundle_attach = esp_crt_bundle_attach,
-//     };
-//     esp_http_client_handle_t client = esp_http_client_new(&config);
-//     if (client == NULL) {
-//         ESP_LOGE(TAG_WIFI, "Failed to create HTTP client");
-//         return false;
-//     }
-//     esp_err_t err = esp_http_client_perform(client);
-//     esp_http_client_cleanup(client);
-//     if (err == ESP_OK) {
-//         ESP_LOGI(TAG_WIFI, "Internet connection OK");
-//         return true;
-//     } else {
-//         ESP_LOGE(TAG_WIFI, "No internet connection: %s", esp_err_to_name(err));
-//         return false;
-//     }
-// }
+static bool is_connected_to_internet(void) { return true; }
 
 void app_main(void) {
-    char time_str[20]; // Mały bufor, może zostać na stosie
+    char time_str[20];
     uint32_t last_checksum = 0;
 
     init_nvs();
@@ -295,7 +280,6 @@ void app_main(void) {
         get_formatted_time(time_str, sizeof(time_str));
         ESP_LOGI(TAG_SNTP, "Current time: %s", time_str);
 
-        // Dynamiczna alokacja dla status_msg
         char *status_msg = malloc(50);
         if (status_msg == NULL) {
             ESP_LOGE(TAG_DISCORD, "Failed to allocate status_msg");
@@ -313,7 +297,6 @@ void app_main(void) {
                 ESP_LOGI(TAG_WEBSITE, "Checksum: %lu", current_checksum);
 
                 if (last_checksum != 0 && current_checksum != last_checksum) {
-                    // Dynamiczna alokacja dla change_msg
                     char *change_msg = malloc(256);
                     if (change_msg == NULL) {
                         ESP_LOGE(TAG_DISCORD, "Failed to allocate change_msg");
@@ -321,19 +304,19 @@ void app_main(void) {
                         continue;
                     }
                     snprintf(change_msg, 256, "Check you the link: %s Checksum changed at %s: %lu -> %lu",
-                             WEBSITE_URL, time_str, last_checksum, current_checksum);
+                             TARGET_URL, time_str, last_checksum, current_checksum);
                     send_discord_message(change_msg, 1);
                     free(change_msg);
                 }
                 last_checksum = current_checksum;
                 free(html);
             } else {
-                ESP_LOGE(TAG_WEBSITE, "Failed to fetch website HTML");
+                ESP_LOGE(TAG_WEBSITE, "Failed to fetch website HTML from both services");
             }
         } else {
             ESP_LOGE(TAG_WIFI, "No internet connection, skipping website fetch");
         }
 
-        vTaskDelay(300000 / portTICK_PERIOD_MS);
+        vTaskDelay(9600000 / portTICK_PERIOD_MS); // 9600000 ms = 2h 40m
     }
 }
