@@ -25,7 +25,7 @@
 #define GRABZIT_URL "https://api.grabz.it/services/convert.ashx?key=" GRABZIT_API_KEY "&delay=5000&format=html&url=" TARGET_URL
 #define BUFFER_SIZE 4096
 #define CHECK_INTERVAL_MS (9600000) // 2h 40m in miliseconds
-#define STATUS_INTERVAL_MS (300000) // 5m in miliseconds
+#define STATUS_INTERVAL_MS (1800000) // 5m in miliseconds
 #define MAX_RETRIES 3
 #define RETRY_DELAY_MS 5000
 static const char *TAG_DISCORD = "DISCORD";
@@ -355,7 +355,7 @@ void app_main(void) {
     if (start_message == NULL) {
         ESP_LOGE(TAG_DISCORD, "Failed to allocate start_message");
     } else {
-        snprintf(start_message, 256, "System started, observing site: %s", TARGET_URL);
+        snprintf(start_message, 256, "@everyone System started, observing site: %s", TARGET_URL);
         send_discord_message(start_message, 0);
         free(start_message);
     }
@@ -401,7 +401,7 @@ void app_main(void) {
                             ESP_LOGE(TAG_DISCORD, "Failed to allocate change_message");
                             continue;
                         }
-                        snprintf(change_message, 256, "Check you the link: %s\nChecksum changed for GrabzIt at %s: %lu -> %lu",
+                        snprintf(change_message, 256, "@everyone Check out the link: %s\nChecksum changed for GrabzIt at %s: %lu -> %lu",
                                  TARGET_URL, current_time_str, last_grabzit_checksum, current_grabzit_checksum);
                         send_discord_message(change_message, 1);
                         free(change_message);
@@ -413,7 +413,7 @@ void app_main(void) {
                             ESP_LOGE(TAG_DISCORD, "Failed to allocate change_message");
                             continue;
                         }
-                        snprintf(change_message, 256, "@everyone Check you the link: %s\nChecksum changed for ScrapingBee at %s: %lu -> %lu",
+                        snprintf(change_message, 256, "@everyone Check out the link: %s\nChecksum changed for ScrapingBee at %s: %lu -> %lu",
                                  TARGET_URL, current_time_str, last_scrapingbee_checksum, current_scrapingbee_checksum);
                         send_discord_message(change_message, 1);
                         free(change_message);
