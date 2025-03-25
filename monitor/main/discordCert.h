@@ -1,3 +1,6 @@
+#ifndef DISCORD_CERT_H
+#define DISCORD_CERT_H
+
 /*
  * Get current discordapp.com certificate:
  * openssl s_client -showcerts -connect discordapp.com:443
@@ -25,3 +28,4 @@ kGN+hr/W5GvT1tMBjgWKZ1i4//emhA1JG1BbPzoLJQvyEotc03lXjTaCzv8mEbep
 vepuoxtGzi4CZ68zJpiq1UvSqTbFJjtbD4seiMHl
 -----END CERTIFICATE-----
 )";
+#endif

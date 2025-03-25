@@ -12,15 +12,10 @@
 #include "esp_timer.h"
 #include "time.h"
 #include "lwip/apps/sntp.h"
+#include "secrets.h"
+#include "discordCert.h"
 
-#define WIFI_SSID "router"
-#define WIFI_PASS "qwerty000"
-#define DISCORD_WEBHOOK_STATUS "https://discord.com/api/webhooks/1352055964282388530/xpAbO0FhnFfSdmzvFUqot9doxNdQiBi5NknNCTU1NFCgXPDmcdzJ_dQjMiBSdKIiySi1"
-#define DISCORD_WEBHOOK_CHANGE "https://discord.com/api/webhooks/1352043110716411990/tl118UmEJPpnom3ziT3mo8FD7i3OCSqSWPpZzki4Vj-awxtsriR7bFHNdXg79xRenXMD"
-#define DISCORD_TTS false
 #define TARGET_URL "https://sabre.wd1.myworkdayjobs.com/SabreJobs?locationCountry=131d5ac7e3ee4d7b962bdc96e498e412"
-#define SCRAPINGBEE_API_KEY "ATSI3ZGN4G9VEZ0P145YCI52HIR98IBX88Z6YH8VMLX0A5MFKA9G8INPGGNETAQCLAYO7KK8HRJQ1CC7"
-#define GRABZIT_API_KEY "YjQwYmE3MDFjOThkNGY5ZWIxYmJjZTM3YmM5NDIzNjM"
 #define SCRAPINGBEE_URL "https://app.scrapingbee.com/api/v1/?api_key=" SCRAPINGBEE_API_KEY "&url=" TARGET_URL "&render_js=true"
 #define GRABZIT_URL "https://api.grabz.it/services/convert.ashx?key=" GRABZIT_API_KEY "&delay=5000&format=html&url=" TARGET_URL
 #define BUFFER_SIZE 4096
@@ -28,34 +23,11 @@
 #define STATUS_INTERVAL_MS (1800000) // 5m in miliseconds
 #define MAX_RETRIES 3
 #define RETRY_DELAY_MS 5000
+
 static const char *TAG_DISCORD = "DISCORD";
 static const char *TAG_WIFI = "WIFI";
 static const char *TAG_WEBSITE = "WEBSITE";
 static const char *TAG_SNTP = "SNTP";
-
-const char *DISCORD_CERT = R"(
------BEGIN CERTIFICATE-----
-MIIDejCCAmKgAwIBAgIQf+UwvzMTQ77dghYQST2KGzANBgkqhkiG9w0BAQsFADBX
-MQswCQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTEQMA4GA1UE
-CxMHUm9vdCBDQTEbMBkGA1UEAxMSR2xvYmFsU2lnbiBSb290IENBMB4XDTIzMTEx
-NTAzNDMyMVoXDTI4MDEyODAwMDA0MlowRzELMAkGA1UEBhMCVVMxIjAgBgNVBAoT
-GUdvb2dsZSBUcnVzdCBTZXJ2aWNlcyBMTEMxFDASBgNVBAMTC0dUUyBSb290IFI0
-MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE83Rzp2iLYK5DuDXFgTB7S0md+8Fhzube
-Rr1r1WEYNa5A3XP3iZEwWus87oV8okB2O6nGuEfYKueSkWpz6bFyOZ8pn6KY019e
-WIZlD6GEZQbR3IvJx3PIjGov5cSr0R2Ko4H/MIH8MA4GA1UdDwEB/wQEAwIBhjAd
-BgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDwYDVR0TAQH/BAUwAwEB/zAd
-BgNVHQ4EFgQUgEzW63T/STaj1dj8tT7FavCUHYwwHwYDVR0jBBgwFoAUYHtmGkUN
-l8qJUC99BM00qP/8/UswNgYIKwYBBQUHAQEEKjAoMCYGCCsGAQUFBzAChhpodHRw
-Oi8vaS5wa2kuZ29vZy9nc3IxLmNydDAtBgNVHR8EJjAkMCKgIKAehhxodHRwOi8v
-Yy5wa2kuZ29vZy9yL2dzcjEuY3JsMBMGA1UdIAQMMAowCAYGZ4EMAQIBMA0GCSqG
-SIb3DQEBCwUAA4IBAQAYQrsPBtYDh5bjP2OBDwmkoWhIDDkic574y04tfzHpn+cJ
-odI2D4SseesQ6bDrarZ7C30ddLibZatoKiws3UL9xnELz4ct92vID24FfVbiI1hY
-+SW6FoVHkNeWIP0GCbaM4C6uVdF5dTUsMVs/ZbzNnIdCp5Gxmx5ejvEau8otR/Cs
-kGN+hr/W5GvT1tMBjgWKZ1i4//emhA1JG1BbPzoLJQvyEotc03lXjTaCzv8mEbep
-8RqZ7a2CPsgRbuvTPBwcOMBBmuFeU88+FSBX6+7iP0il8b4Z0QFqIwwMHfs/L6K1
-vepuoxtGzi4CZ68zJpiq1UvSqTbFJjtbD4seiMHl
------END CERTIFICATE-----
-)";
 
 static void init_nvs(void) {
     esp_err_t ret = nvs_flash_init();
